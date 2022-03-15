@@ -9,7 +9,7 @@ The files in this repository were used to configure the network depicted below.
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
 
 #### Playbook 1: docker-playbook.yml
-'''
+```
 
 ---
   - name: Docker.io and DVWA Playbook
@@ -47,11 +47,11 @@ These files have been tested and used to generate a live ELK deployment on Azure
       systemd:
         name: docker
         enabled: yes
-'''
+```
 
 	
 #### Playbook 2: install-elk.yml
-'''
+```
 
 ---
   - name: ELK Stack Configurtion Playbook
@@ -100,11 +100,11 @@ These files have been tested and used to generate a live ELK deployment on Azure
           - 5601:5601
           - 9200:9200
           - 5044:5044
-'''
+```
 
 		  
 #### Playbook 3: filebeat-playbook.yml
-'''
+```
 
 ---
   - name: Install and Launch Filebeat
@@ -143,11 +143,11 @@ These files have been tested and used to generate a live ELK deployment on Azure
       systemd:
         name: filebeat
         enabled: yes
-'''
+```
 	
 		
 #### Playbook 4: metricbeat-playbook.yml
-'''
+```
 
 ---
   - name: Install and Launch Metricbeat
@@ -186,7 +186,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
       systemd:
         name: metricbeat
         enabled: yes
-'''
+```
 
 
 The following Configuration Files were used with these Playbooks:
