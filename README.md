@@ -47,7 +47,8 @@ These files have been tested and used to generate a live ELK deployment on Azure
       systemd:
         name: docker
         enabled: yes
-	
+''''
+
 	
 #### Playbook 2: install-elk.yml
 ''''
@@ -99,6 +100,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
           - 5601:5601
           - 9200:9200
           - 5044:5044
+''''
 
 		  
 #### Playbook 3: filebeat-playbook.yml
@@ -141,7 +143,8 @@ These files have been tested and used to generate a live ELK deployment on Azure
       systemd:
         name: filebeat
         enabled: yes
-		
+''''
+	
 		
 #### Playbook 4: metricbeat-playbook.yml
 ''''
@@ -183,6 +186,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
       systemd:
         name: metricbeat
         enabled: yes
+''''
 
 
 The following Configuration Files were used with these Playbooks:
