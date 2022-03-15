@@ -190,13 +190,17 @@ These files have been tested and used to generate a live ELK deployment on Azure
 
 The following Configuration Files were used with these Playbooks:
 
-ansible.cfg           (https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/ansible.cfg)
+# ansible.cfg:   
+(https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/ansible.cfg)
 
-hosts                 (https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/hosts.txt)
+# hosts:          
+(https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/hosts.txt)
 
-filebeat-config.yml   (https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/filebeat-config.yml)
+# filebeat-config.yml:
+(https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/filebeat-config.yml)
 
-metricbeat-config.yml (https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/metricbeat-config.yml)
+# metricbeat-config.yml:
+(https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/metricbeat-config.yml)
 
 
 
