@@ -6,7 +6,7 @@ The files in this repository were used to configure the network depicted below.
 
 ![](https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Diagrams/Azure%20Cloud%20Project%20Network%20Diagram%20-%20ELK%20Stack.PNG)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to recreate the entire deployment pictured above.
 
 #### Playbook 1: docker-playbook.yml
 ```
@@ -48,7 +48,6 @@ These files have been tested and used to generate a live ELK deployment on Azure
         name: docker
         enabled: yes
 ```
-
 	
 #### Playbook 2: install-elk.yml
 ```
@@ -192,9 +191,13 @@ These files have been tested and used to generate a live ELK deployment on Azure
 The following Configuration Files were used with these Playbooks:
 
 ansible.cfg           (https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/ansible.cfg)
+
 hosts                 (https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/hosts.txt)
+
 filebeat-config.yml   (https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/filebeat-config.yml)
+
 metricbeat-config.yml (https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/metricbeat-config.yml)
+
 
 
 
