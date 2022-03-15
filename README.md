@@ -2,13 +2,194 @@
 
 The files in this repository were used to configure the network depicted below.
 
-**Note**: The following image link needs to be updated. Replace `diagram_filename.png` with the name of your diagram image file.  
+#### Microsoft Azure ELK Stack Deployment Network Diagram
 
 ![](https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Diagrams/Azure%20Cloud%20Project%20Network%20Diagram%20-%20ELK%20Stack.PNG)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
 
-  - _TODO: Enter the playbook file._
+#### Playbook 1: docker-playbook.yml
+''''
+
+---
+  - name: Docker.io and DVWA Playbook
+    hosts: webservers
+    become: true
+    tasks:
+
+    - name: Install docker.io
+      apt:
+        force_apt_get: yes
+        update_cache: yes
+        name: docker.io
+        state: present
+
+    - name: Install python3-pip
+      apt:
+        force_apt_get: yes
+        name: python3-pip
+        state: present
+
+    - name: Install Docker python module
+      pip:
+        name: docker
+        state: present
+
+    - name: Install and Launch Docker Web Container DVWA on Port 80
+      docker_container:
+        name: dvwa
+        image: cyberxsecurity/dvwa
+        state: started
+        restart_policy: always
+        published_ports: 80:80
+
+    - name: Enable Docker Service
+      systemd:
+        name: docker
+        enabled: yes
+	
+	
+#### Playbook 2: install-elk.yml
+''''
+
+---
+  - name: ELK Stack Configurtion Playbook
+    hosts: elk
+    remote_user: azadmin
+    become: true
+    tasks:
+
+    # Use apt module to install docker.io
+    - name: Install docker.io
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+        name: docker.io
+        state: present
+
+    # Use apt module to install python3-pip
+    - name: Install python3-pip
+      apt:
+        force_apt_get: yes
+        name: python3-pip
+        state: present
+
+    # Use pip module to install docker
+    - name: Install Docker Module
+      pip:
+        name: docker
+        state: present
+
+    # Use sysctl module to increase memory
+    - name: Use more memory
+      sysctl:
+        name: vm.max_map_count
+        value: 262144
+        state: present
+        reload: yes
+
+    # Use docker_container module to download and launch sebp/elk:761 on ports 5601 / 9200 / 5044
+    - name: Download and Launch a Docker ELK container
+      docker_container:
+        name: elk
+        image: sebp/elk:761
+        state: started
+        restart_policy: always
+        published_ports:
+          - 5601:5601
+          - 9200:9200
+          - 5044:5044
+
+		  
+#### Playbook 3: filebeat-playbook.yml
+''''
+
+---
+  - name: Install and Launch Filebeat
+    hosts: webservers
+    become: true
+    tasks:
+
+    # Download latest filebeat deb found in Kibana
+    - name: Download Filebeat DEB
+      command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
+
+    # Install latest filebeat deb found in Kibana
+    - name: Install Filebeat DEB
+      command: sudo dpkg -i filebeat-7.6.1-amd64.deb
+
+    # Drop Filebeat config file into new /etc/filebeat/filebeat.yml
+    - name: Drop Config File in filebeat.yml
+      copy:
+        src: /etc/ansible/files/filebeat-config.yml
+        dest: /etc/filebeat/filebeat.yml
+
+    # Enable filebeat modules
+    - name: Enable filebeat modules
+      command: filebeat modules enable system
+
+    # Setup filebeat
+    - name: Setup filebeat
+      command: filebeat setup
+
+    # Start filebeat service
+    - name: Start filebeat service
+      command: service filebeat start
+
+    # Enable filebeat service on boot
+    - name: Enable filebeat on boot
+      systemd:
+        name: filebeat
+        enabled: yes
+		
+		
+#### Playbook 4: metricbeat-playbook.yml
+''''
+
+---
+  - name: Install and Launch Metricbeat
+    hosts: webservers
+    become: true
+    tasks:
+
+    # Download latest metricbeat deb found in Kibana
+    - name: Download Metricbeat DEB
+      command: curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.6.1-amd64.deb
+
+    # Install latest metricbeat deb found in Kibana
+    - name: Install Metricbeat DEB
+      command: dpkg -i metricbeat-7.6.1-amd64.deb
+
+    # Drop Metricbeat config file into new /etc/metricbeat/metricbeat.yml
+    - name: Drop Config File in metricbeat.yml
+      copy:
+        src: /etc/ansible/files/metricbeat-config.yml
+        dest: /etc/metricbeat/metricbeat.yml
+
+    # Enable metricbeat modules
+    - name: Enable metricbeat modules
+      command: metricbeat modules enable docker
+
+    # Setup metricbeat
+    - name: Setup metricbeat
+      command: metricbeat setup
+
+    # Start metricbeat service
+    - name: Start metricbeat service
+      command: service metricbeat start
+
+    # Enable metricbeat service on boot
+    - name: Enable metricbeat on boot
+      systemd:
+        name: metricbeat
+        enabled: yes
+
+
+The following Configuration Files were used with these Playbooks:
+
+
+
+
 
 This document contains the following details:
 - Description of the Topologu
