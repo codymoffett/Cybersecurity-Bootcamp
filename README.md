@@ -356,11 +356,31 @@ SSH into the control node and follow the steps below:
 10.1.0.4 ansible_python_interpreter=/usr/bin/python3
 ```
 
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Update the hosts file `/etc/ansible/ansible.cfg/` to include:
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
+```
+# default user to use for playbooks if user is not specified
+# (/usr/bin/ansible will use current user as default)
+remote_user = azadmin
+```
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+### Steps to Run the Playbooks
+
+1. From local machine, ssh into the Jump-Box-Provisioner `~$ ssh azadmin@52.168.139.135`
+
+2. Start the Ansible Docker container `~$ sudo docker start laughing_mclaren`. `laughing_mclaren` is the name of the docker container in Jump-Box-Provisioner.
+
+3. Run `~$ sudo docker attach laughing_mclaren` to jump into the Ansible Docker Container.
+
+4. Run the four playbooks with the following commands:
+
+- `~$ ansible-playbook /etc/ansible/docker-playbook.yml`
+- `~$ ansible-playbook /etc/ansible/install-elk.yml`
+- `~$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
+- `~$ ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`
+
+5. From the Jump-Box-Provisioner, ssh into ELK-Stack-Server `~$ ssh azadmin@<DYNAMIC-ELK-PUBLIC-IP>`
+
+6. In the Elk-Stack-Server run `~$ sudo docker start elk`
+
+7. If there are no errors then you can go to [http://<DYNAMIC-ELK-PUBLIC-IP>:5601/app/kibana]() and start monitoring data from **Metricbeat** and **Filebeat** from the Web-1 and Web-2 webservers.
