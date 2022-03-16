@@ -242,36 +242,84 @@ The configuration details of each machine may be found below.
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the Jump-Box-Provisioner can accept connections from the Internet (Port 80). Access to this machine is only allowed from the following IP addresses:
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+- 70.176.160.246
+
+Machines within the network can only be accessed by the Jump-Box-Provisioner machine.
+
+- 10.0.0.7 can access Web-1, Web-2, ELK-Stack-Server using SSH over Port 22.
+
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name                 | Publicly Accessible | Allowed IP Addresses |
+|----------------------|---------------------|----------------------|
+| Jump-Box-Provisioner | Yes (SSH Port 22)   | 70.176.160.246       |
+|  Web-1               | Yes (HTTP Port 80)  | 70.176.160.246       |
+|  Web-2               | Yes (HTTP Port 80)  | 70.176.160.246       |
+|  Elk-Stack-Server    | Yes (HTTP Port 5601)| 70.176.160.246       |
+
 
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
 
-The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- Allows quick configuration of new machines in a consistent manor.
+- Everyone can see exactly how the network is configured by reading the configuration files.
+- Allows automatic updates to occur to machines on the network whenever the configuration files change.
+
+### Playbooks Explained
+
+#### Playbook 1: docker-playbook.yml
+
+This playbook is used to set up DVWA servers running inside a Docker container. This file was used to configure Web-1 and Web-2. The playbook executes the following tasks:
+
+- Installs Docker
+- Installs Python3
+- Installs Docker Python Module
+- Downloads and Launches DVWA Docker Container over Port 80
+- Enables the Docker service
+
+#### Playbook 2: install-elk.yml
+
+This playbook is used to set up an ELK server running inside a Docker container. This file was used to configure Elk-Stack-Server. The playbook executes the following tasks:
+
+- Installs Docker
+- Installs Python3
+- Installs Docker Python Module
+- Increase Virtual Memory to 262144 to support the ELK Stack
+- Download and Launch Docker Elk Container (image: sebp/elk:761)
+
+#### Playbook 3: filebeat-playbook.yml
+
+This playbook is used to deploy Filebeat on the Web-1 and Web-2 servers. This allows the elk service on Elk-Stack_Server to monitor log file activity on the webservers. The playbook executes the following tasks:
+
+- Downloads latest Filebeat deb from Kibana
+- Installs latest Filebeat deb found in Kibana
+- Drops in new Filebeat config file into /etc/filebeat/filebeat.yml
+- Enable Filebeat Modules
+- Setup Filebeat
+- Start Filebeat service
+-Enable Filebeat service on boot
+
+#### Playbook 4: metricbeat-playbook.yml
+
+This playbook is used to deploy Metricbeat on the Web-1 and Web-2 servers. This allows the elk service on Elk-Stack_Server to monitor metrics from operating systems and services on the webservers. The playbook executes the following tasks:
+
+- Downloads latest Metricbeat deb from Kibana
+- Installs latest Metricbeat deb found in Kibana
+- Drops in new Metricbeat config file into /etc/metricbeat/metricbeat.yml
+- Enable Metricbeat Modules
+- Setup Metricbeat
+- Start Metricbeat service
+-Enable Metricbeat service on boot
+
+
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-**Note**: The following image link needs to be updated. Replace `docker_ps_output.png` with the name of your screenshot image file.  
-
-
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+![](https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Diagrams/Azure%20Cloud%20Project%20Network%20Diagram%20-%20ELK%20Stack.PNG)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
