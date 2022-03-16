@@ -188,7 +188,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
 ```
 
 
-The following Configuration Files were used with these Playbooks:
+#### The following Configuration Files were used with these Playbooks:
 
 ##### ansible.cfg: 
 https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Ansible/Ansible%20Config%20Files/ansible.cfg
@@ -209,8 +209,8 @@ This document contains the following details:
 - Description of the Topologu
 - Access Policies
 - ELK Configuration
-  - Beats in Use
-  - Machines Being Monitored
+- Beats in Use
+- Machines Being Monitored
 - How to Use the Ansible Build
 
 
@@ -218,22 +218,25 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
+- Load balancers are an effective soultion against Denial of Service attacks. They offer health probes to check machines behind the load balancer for issues.
+- A Jump Box allows us to minimize the surface area of attack by only having one virtual machine public facing allowing network traffic through. Remote connections are easily filtered and monitored through the Jump Box.
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the configuration and system files.
+- **Filebeat** monitors the log files, collects log events, and forwards them to Elasticsearch or Logstash.
+- **Metricbeat** periodically collects metrics from the operating system and from services running on the server, then forwards this data to Elasticsearch or Logstash.
+
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function | IP Address | Operating System |
-|----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.1   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+
+| Name                 | Function | IP Address | Operating System |
+|----------------------|----------|------------|------------------|
+| Jump-Box-Provisioner | Gateway  | 10.0.0.7   | Linux            |
+| Web-1                |  DVWA    | 10.0.0.8   | Linux            |
+| Web-2                |  DVWA    | 10.0.0.9   | Linux            |
+| ELK-Stack-Server     |  ELK     | 10.1.0.4   | Linux            |
+
 
 ### Access Policies
 
