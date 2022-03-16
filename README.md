@@ -345,14 +345,16 @@ In order to use the playbook, you will need to have an Ansible control node alre
 SSH into the control node and follow the steps below:
 
 - Copy the playbook files to Ansible Docker Contianer.
-- Update the hosts file `/etc/ansible/hosts/ to include:
+- Update the hosts file `/etc/ansible/hosts/` to include:
 
-'[webservers]
+```
+[webservers]
 10.0.0.8 ansible_python_interpreter=/usr/bin/python3
 10.0.0.9 ansible_python_interpreter=/usr/bin/python3
 
 [elk]
-10.1.0.4 ansible_python_interpreter=/usr/bin/python3'
+10.1.0.4 ansible_python_interpreter=/usr/bin/python3
+```
 
 - Run the playbook, and navigate to ____ to check that the installation worked as expected.
 
