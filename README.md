@@ -379,8 +379,8 @@ remote_user = azadmin
 - `~$ ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
 - `~$ ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`
 
-5. From the Jump-Box-Provisioner, ssh into ELK-Stack-Server `~$ ssh azadmin@<DYNAMIC-ELK-PUBLIC-IP>`
+5. From the Jump-Box-Provisioner, ssh into ELK-Stack-Server `~$ ssh azadmin@<dynamic-elk-public-ip>`
 
 6. In the Elk-Stack-Server run `~$ sudo docker start elk`
 
-7. If there are no errors then you can go to [http://\<DYNAMIC-ELK-PUBLIC-IP\>:5601/app/kibana]() and start monitoring data from **Metricbeat** and **Filebeat** from the Web-1 and Web-2 webservers.
+7. If there are no errors then you can go to [http://\<dynamic-elk-public-ip\>:5601/app/kibana]() and start monitoring data from **Metricbeat** and **Filebeat** from the Web-1 and Web-2 webservers.
