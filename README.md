@@ -319,7 +319,7 @@ This playbook is used to deploy Metricbeat on the Web-1 and Web-2 servers. This 
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![](https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Diagrams/Azure%20Cloud%20Project%20Network%20Diagram%20-%20ELK%20Stack.PNG)
+![](https://github.com/codymoffett/Cybersecurity-Bootcamp/blob/main/Diagrams/sudo_docker_ps_command.PNG)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
