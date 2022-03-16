@@ -383,4 +383,4 @@ remote_user = azadmin
 
 6. In the Elk-Stack-Server run `~$ sudo docker start elk`
 
-7. If there are no errors then you can go to [http://<DYNAMIC-ELK-PUBLIC-IP>:5601/app/kibana]() and start monitoring data from **Metricbeat** and **Filebeat** from the Web-1 and Web-2 webservers.
+7. If there are no errors then you can go to [http://\<DYNAMIC-ELK-PUBLIC-IP\>:5601/app/kibana]() and start monitoring data from **Metricbeat** and **Filebeat** from the Web-1 and Web-2 webservers.
